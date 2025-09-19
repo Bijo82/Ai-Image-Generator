@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How to Use - Image Generator</title>
+    <link rel="shortcut icon" href="Assets/Images/Logo.svg" type="image/x-icon">
+    <!-- <link rel="stylesheet" href="Assets/css/bootstrap.min.css">
+    <script src="Assets/js/bootstrap.min.js"></script> -->
+    <!-- With this -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #0f0f0f;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            line-height: 1.6;
+        }
+
+        #bg-video {
+            position: fixed;
+            top: 0;
+            left: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -1;
+            object-fit: cover;
+            opacity: 0.2;
+        }
+
+        .navbar {
+            background: rgba(0, 0, 0, 0.9) !important;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .navbar-brand, .nav-link {
+            color: #ffffff !important;
+        }
+
+        .nav-link:hover {
+            color: rgb(138, 43, 226) !important;
+        }
+
+        #loginbtn {
+            background-color: rgb(138, 43, 226);
+            color: aliceblue;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        #loginbtn:hover {
+            background-color: rgb(153, 0, 153);
+            transform: scale(1.05);
+        }
+
+        #loginbtn a {
+            text-decoration: none;
+            color: aliceblue;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-section {
+            text-align: center;
+            margin-bottom: 60px;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(153, 0, 153, 0.1));
+            border-radius: 20px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.3);
+        }
+
+        .hero-section h1 {
+            font-size: 3.5rem;
+            color: rgb(138, 43, 226);
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+        }
+
+        .hero-section p {
+            font-size: 1.3rem;
+            color: #cccccc;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section {
+            margin-bottom: 50px;
+            padding: 40px;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 15px;
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.1);
+        }
+
+        .section h2 {
+            color: rgb(138, 43, 226);
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            border-bottom: 2px solid rgb(138, 43, 226);
+            padding-bottom: 10px;
+        }
+
+        .section h3 {
+            color: rgb(153, 0, 153);
+            font-size: 1.8rem;
+            margin: 30px 0 15px 0;
+        }
+
+        .step-card {
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(138, 43, 226, 0.3);
+        }
+
+        .step-number {
+            display: inline-block;
+            background: rgb(138, 43, 226);
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-right: 15px;
+        }
+
+        .step-title {
+            color: rgb(138, 43, 226);
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .code-block {
+            background: rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+            color: #00ff00;
+            overflow-x: auto;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .feature-card {
+            background: rgba(138, 43, 226, 0.1);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 10px;
+            padding: 25px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(138, 43, 226, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            color: rgb(138, 43, 226);
+            margin-bottom: 15px;
+        }
+
+        .tips-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tips-list li {
+            background: rgba(138, 43, 226, 0.1);
+            border-left: 4px solid rgb(138, 43, 226);
+            margin: 15px 0;
+            padding: 15px 20px;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .warning-box {
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #ffc107;
+        }
+
+        .info-box {
+            background: rgba(0, 123, 255, 0.1);
+            border: 1px solid rgba(0, 123, 255, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            color: #007bff;
+        }
+
+        .screenshot-container {
+            margin: 20px 0;
+            text-align: center;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.3);
+        }
+
+        .screenshot-container img {
+            width: 100%;
+            height: auto;
+            max-width: 100%;
+            object-fit: contain;
+            border-radius: 10px;
+            border: 2px solid rgba(138, 43, 226, 0.5);
+            background: rgba(0, 0, 0, 0.8);
+        }
+
+        .screenshot-placeholder {
+            background: rgba(138, 43, 226, 0.2);
+            border: 2px dashed rgba(138, 43, 226, 0.5);
+            border-radius: 10px;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: rgb(138, 43, 226);
+            font-size: 1.2rem;
+            margin: 20px 0;
+        }
+
+        /* Responsive image handling */
+        .full-width-image {
+            width: 100%;
+            max-width: 1200px;
+            height: auto;
+            margin: 20px auto;
+            display: block;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(138, 43, 226, 0.4);
+            border: 3px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .inline-image {
+            width: 10px;
+            height: 10px;
+            border-radius: 8px;
+            margin: 10px 0;
+            box-shadow: 0 0 15px rgba(138, 43, 226, 0.3);
+        }
+
+        .feature-image {
+            width: 100%;
+            max-width: 400px;
+            height: auto;
+            margin: 15px auto;
+            display: block;
+            border-radius: 10px;
+            border: 2px solid rgba(138, 43, 226, 0.4);
+        }
+
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: rgb(138, 43, 226);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(138, 43, 226, 0.5);
+            transition: all 0.3s ease;
+        }
+
+        .back-to-top:hover {
+            transform: scale(1.1);
+            background: rgb(153, 0, 153);
+        }
+
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+            
+            .container {
+                padding: 20px 10px;
+            }
+            
+            .section {
+                padding: 20px;
+            }
+            
+            .feature-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <video autoplay muted loop id="bg-video">
+        <source src="Assets/videos/back3.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
+    </video>
+
+    <nav class="navbar navbar-expand-lg">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">Image Generator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#">How to Use?</a>
+                    </li>
+                </ul>
+                <form class="d-flex">
+                    <button class="btn" id="loginbtn" type="button">
+                        <a href="login.html">Login</a>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Hero Section -->
+        <div class="hero-section">
+            <h1>How to Use Image Generator</h1>
+            <p>Learn how to create stunning AI-generated images from text prompts with our powerful and easy-to-use image generation tool.</p>
+        </div>
+
+        <!-- Getting Started -->
+        <div class="section">
+            <h2>🚀 Getting Started</h2>
+            <p>Welcome to the Image Generator! This tool uses advanced AI technology to create unique images based on your text descriptions. Follow this comprehensive guide to get the most out of your image generation experience.</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎨</div>
+                    <h3>Creative Freedom</h3>
+                    <p>Generate any image you can imagine with detailed text prompts</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Fast Generation</h3>
+                    <p>Get high-quality images in seconds with our optimized AI models</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">💾</div>
+                    <h3>Easy Download</h3>
+                    <p>Download your generated images in high resolution instantly</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Step by Step Guide -->
+        <div class="section">
+            <h2>📋 Step-by-Step Guide</h2>
+            
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">1</span>
+                    Access the Image Generator
+                </div>
+                <p>Navigate to the home page by clicking on "Home" in the navigation bar or go directly to <code>index.html</code>.</p>
+                <div class="screenshot-container">
+                    <img src="Assets/Images/home.png" alt="Home page interface showing the main Image Generator layout" class="full-width-image">
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">2</span>
+                    Enter Your Text Prompt
+                </div>
+                <p>In the left panel, you'll find a text input field labeled "Enter a Text to Generate The Image". Click on this field and type your detailed description.</p>
+                <div class="screenshot-container">
+                    <img src="Assets/Images/prompt.png" alt="Text input field for entering image prompts" class="inline-image">
+                </div>
+                <div class="code-block">
+Example prompts:
+• "A sunset over mountains with golden clouds"
+• "A cute cat sitting in a flower garden"
+• "Futuristic city with flying cars at night"
+• "Abstract painting with vibrant colors and geometric shapes"
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">3</span>
+                    Generate Your Image
+                </div>
+                <p>Click the "Generate Image" button to start the AI image creation process. The system will process your prompt and create a unique image.</p>
+                <div class="screenshot-container">
+                    <img src="Assets/Images/Loading.png" alt="Generate Image button with loading state" class="feature-image">
+                </div>
+                <div class="info-box">
+                    <strong>💡 Pro Tip:</strong> Be specific in your descriptions for better results. Include details about colors, style, mood, and composition.
+                </div>
+            </div>
+
+            <div class="step-card">
+                <div class="step-title">
+                    <span class="step-number">4</span>
+                    View Your Generated Image
+                </div>
+                <p>Your generated image will appear in the right panel within the purple-bordered image box. The image will replace the default placeholder.</p>
+                <div class="screenshot-container">
+                    <img src="Assets/Images/Output.png" alt="Generated image displayed in the purple-bordered container" class="full-width-image">
+                </div>
+            </div>
+
+            
+        </div>
+
+        <!-- Writing Effective Prompts -->
+        <div class="section">
+            <h2>✍️ Writing Effective Prompts</h2>
+            <p>The quality of your generated image largely depends on how well you describe what you want. Here are some tips for writing effective prompts:</p>
+
+            <h3>Prompt Structure</h3>
+            <div class="code-block">
+[Subject] + [Action/Pose] + [Environment/Setting] + [Style/Mood] + [Additional Details]
+
+Example: "A majestic eagle soaring through cloudy skies above snow-capped mountains, photorealistic style, golden hour lighting"
+            </div>
+
+            <h3>Best Practices</h3>
+            <ul class="tips-list">
+                <li><strong>Be Specific:</strong> Instead of "a dog", try "a golden retriever puppy playing in a green meadow"</li>
+                <li><strong>Include Style:</strong> Mention artistic styles like "watercolor", "digital art", "photorealistic", or "cartoon style"</li>
+                <li><strong>Describe Lighting:</strong> Add lighting conditions like "soft morning light", "dramatic shadows", or "neon lighting"</li>
+                <li><strong>Add Colors:</strong> Specify color schemes like "warm autumn colors", "cool blue tones", or "vibrant rainbow colors"</li>
+                <li><strong>Set the Mood:</strong> Include emotional descriptors like "peaceful", "mysterious", "energetic", or "serene"</li>
+            </ul>
+
+            <h3>Example Prompts by Category</h3>
+            
+            <h4>🖼️ Landscapes</h4>
+            <div class="code-block">
+• "Misty forest path with ancient oak trees, morning sunlight filtering through fog, fantasy art style"
+• "Tropical beach at sunset with palm trees and crystal clear water, vibrant colors, peaceful atmosphere"
+• "Snow-covered mountain range under starry night sky, northern lights dancing in the background"
+            </div>
+
+            <h4>🎭 Portraits</h4>
+            <div class="code-block">
+• "Portrait of a wise elderly wizard with long white beard, magical sparkles in eyes, fantasy art style"
+• "Young woman with curly red hair, wearing vintage 1950s dress, soft studio lighting, film photography style"
+• "Futuristic robot with glowing blue eyes, metallic surface, sci-fi concept art"
+            </div>
+
+            <h4>🏛️ Architecture</h4>
+            <div class="code-block">
+• "Gothic cathedral with flying buttresses, stained glass windows, dramatic storm clouds overhead"
+• "Modern glass skyscraper reflecting city lights at night, urban photography style"
+• "Cozy cottage with thatched roof surrounded by colorful flower garden, fairy tale illustration"
+            </div>
+
+            <h4>🎨 Abstract</h4>
+            <div class="code-block">
+• "Abstract composition with flowing curved lines, gradient from purple to gold, modern digital art"
+• "Geometric pattern with interlocking triangles, bold primary colors, minimalist style"
+• "Fluid paint splashes creating organic shapes, vibrant neon colors on black background"
+            </div>
+        </div>
+
+        <!-- Features and Controls -->
+        <div class="section">
+            <h2>🎛️ Features and Controls</h2>
+            
+            <h3>Main Interface Elements</h3>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>Text Input Field</h4>
+                    <p>Large text area where you enter your image description prompts</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Generate Button</h4>
+                    <p>Initiates the AI image generation process based on your prompt</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Image Display Area</h4>
+                    <p>Purple-bordered box where your generated image appears</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Download Button</h4>
+                    <p>Saves the generated image to your device's downloads folder</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Reset Button</h4>
+                    <p>Clears the current image and resets the interface</p>
+                </div>
+                <div class="feature-card">
+                    <h4>Navigation Menu</h4>
+                    <p>Access Home, History, and How to Use sections</p>
+                </div>
+            </div>
+
+            <h3>User Account Features</h3>
+            <p>Create an account to unlock additional features:</p>
+            <ul class="tips-list">
+                <li><strong>Image History:</strong> Save and review your previously generated images</li>
+                <li><strong>Favorites:</strong> Bookmark your best creations</li>
+                <li><strong>Advanced Settings:</strong> Access additional generation parameters</li>
+                <li><strong>Higher Resolution:</strong> Generate images in higher quality</li>
+            </ul>
+        </div>
+
+        <!-- Account Management -->
+        <div class="section">
+            <h2>👤 Account Management</h2>
+            
+            <h3>Creating an Account</h3>
+            <div class="step-card">
+                <p>To access advanced features and save your images:</p>
+                <div class="screenshot-container">
+                    <img src="Assets/Images/Login.png" alt="Sign up form with fields for name, username, and password" class="inline-image">
+                </div>
+                <ol>
+                    <li>Click the "Login" button in the top navigation</li>
+                    <li>Select "Sign Up" on the login page</li>
+                    <li>Fill in your name, username, and password</li>
+                    <li>Confirm your password and click "Sign Up"</li>
+                </ol>
+            </div>
+
+            <h3>Logging In</h3>
+            <div class="step-card">
+                <p>Access your account by:</p>
+                <div class="screenshot-container">
+                    <img src="Assets/Images/Login.png" alt="Login form with username and password fields" class="inline-image">
+                </div>
+                <ol>
+                    <li>Clicking the "Login" button</li>
+                    <li>Entering your username and password</li>
+                    <li>Clicking "Login" to access your account</li>
+                </ol>
+            </div>
+
+            
+        </div>
+
+        <!-- Troubleshooting -->
+        <div class="section">
+            <h2>🔧 Troubleshooting</h2>
+            
+            <h3>Common Issues and Solutions</h3>
+            
+            <div class="warning-box">
+                <strong>⚠️ Image Not Generating</strong>
+                <ul>
+                    <li>Check your internet connection</li>
+                    <li>Make sure your prompt is not empty</li>
+                    <li>Try refreshing the page</li>
+                    <li>Ensure JavaScript is enabled in your browser</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Download Not Working</strong>
+                <ul>
+                    <li>Check if pop-ups are blocked in your browser</li>
+                    <li>Ensure you have generated an image first</li>
+                    <li>Try right-clicking the image and selecting "Save image as"</li>
+                    <li>Clear your browser cache and try again</li>
+                </ul>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ Poor Image Quality</strong>
+                <ul>
+                    <li>Try being more specific in your prompt</li>
+                    <li>Add style descriptors like "high quality", "detailed"</li>
+                    <li>Avoid contradictory instructions in your prompt</li>
+                    <li>Consider creating an account for higher resolution options</li>
+                </ul>
+            </div>
+
+            <h3>Browser Compatibility</h3>
+            <div class="info-box">
+                <strong>Supported Browsers:</strong>
+                <ul>
+                    <li>Google Chrome (Recommended)</li>
+                    <li>Mozilla Firefox</li>
+                    <li>Safari (macOS)</li>
+                    <li>Microsoft Edge</li>
+                </ul>
+                <p>For best performance, ensure your browser is updated to the latest version.</p>
+            </div>
+        </div>
+
+        <!-- Tips and Tricks -->
+        <div class="section">
+            <h2>💡 Tips and Tricks</h2>
+            
+            <h3>Advanced Techniques</h3>
+            <ul class="tips-list">
+                <li><strong>Combine Styles:</strong> Mix different art styles like "watercolor meets digital art" or "realistic photography with fantasy elements"</li>
+                <li><strong>Use Negative Space:</strong> Describe what you don't want: "bright sunny day, no clouds, no shadows"</li>
+                <li><strong>Reference Famous Artists:</strong> "In the style of Van Gogh" or "Picasso-inspired cubist portrait"</li>
+                <li><strong>Specify Camera Settings:</strong> "Shot with 85mm lens, shallow depth of field, bokeh background"</li>
+                <li><strong>Add Texture Details:</strong> "Rough wooden texture", "smooth marble surface", "soft fabric material"</li>
+            </ul>
+
+            <h3>Creative Ideas</h3>
+            <ul class="tips-list">
+                <li><strong>Seasonal Themes:</strong> Create images for different seasons and holidays</li>
+                <li><strong>Fantasy Worlds:</strong> Design imaginary creatures, magical landscapes, and mythical scenes</li>
+                <li><strong>Concept Art:</strong> Generate ideas for characters, environments, and objects</li>
+                <li><strong>Abstract Expressions:</strong> Explore emotions through colors, shapes, and compositions</li>
+                <li><strong>Historical Scenarios:</strong> Recreate or reimagine historical events and periods</li>
+            </ul>
+        </div>
+
+        <!-- FAQ -->
+        <div class="section">
+            <h2>❓ Frequently Asked Questions</h2>
+            
+            <h3>General Questions</h3>
+            
+            <div class="step-card">
+                <h4>Q: Is the Image Generator free to use?</h4>
+                <p>A: Yes, basic image generation is free. Creating an account unlocks additional features and higher resolution options.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Q: How long does it take to generate an image?</h4>
+                <p>A: Most images are generated within 10-30 seconds, depending on complexity and server load.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Q: Can I use the generated images commercially?</h4>
+                <p>A: Please check our terms of service for commercial usage rights and licensing information.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Q: What image formats are supported for download?</h4>
+                <p>A: Generated images are available in high-quality PNG format with transparent background support.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Q: Can I edit the generated images?</h4>
+                <p>A: Once downloaded, you can edit the images using any image editing software like Photoshop, GIMP, or online editors.</p>
+            </div>
+
+            <h3>Technical Questions</h3>
+            
+            <div class="step-card">
+                <h4>Q: What AI model is used for generation?</h4>
+                <p>A: We use state-of-the-art diffusion models optimized for high-quality image generation from text prompts.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Q: Are there any content restrictions?</h4>
+                <p>A: Yes, we have content filters to ensure generated images are appropriate and comply with our community guidelines.</p>
+            </div>
+
+            <div class="step-card">
+                <h4>Q: Can I generate multiple images from the same prompt?</h4>
+                <p>A: Each generation creates a unique image. Run the same prompt multiple times to get variations.</p>
+            </div>
+        </div>
+
+        <!-- Support -->
+        <div class="section">
+            <h2>📞 Support and Contact</h2>
+            <p>Need additional help? We're here to assist you!</p>
+            
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h4>📧 Email Support</h4>
+                    <p>Send us your questions at support@imagegenerator.com</p>
+                </div>
+                <div class="feature-card">
+                    <h4>💬 Live Chat</h4>
+                    <p>Available during business hours for instant help</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📚 Documentation</h4>
+                    <p>Comprehensive guides and tutorials available online</p>
+                </div>
+            </div>
+
+            <div class="info-box">
+                <strong>Before contacting support:</strong>
+                <ul>
+                    <li>Check this How to Use guide for solutions</li>
+                    <li>Try the troubleshooting steps</li>
+                    <li>Note your browser version and operating system</li>
+                    <li>Include screenshots if reporting visual issues</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Smooth scrolling for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Back to top functionality
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+
+        // Show/hide back to top button
+        window.addEventListener('scroll', function() {
+            const backToTop = document.querySelector('.back-to-top');
+            if (window.pageYOffset > 300) {
+                backToTop.style.display = 'block';
+            } else {
+                backToTop.style.display = 'none';
+            }
+        });
+
+        // Add animation to step cards on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all step cards and feature cards
+        document.querySelectorAll('.step-card, .feature-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(card);
+        });
+    </script>
+</body>
+</html>

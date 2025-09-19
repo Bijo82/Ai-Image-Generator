@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      background: var(--bg-dark);
+      overflow: hidden;
+    }
+
+    .loading-screen {
+      text-align: center;
+      color: var(--text-white);
+      animation: fadeOut 1s ease-in-out 2.5s forwards;
+    }
+
+    .loader-ring {
+      width: 100px;
+      height: 100px;
+      border: 6px solid rgba(255, 255, 255, 0.2);
+      border-top: 6px solid var(--primary-color);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+      margin: 0 auto 20px auto;
+    }
+
+    .loading-text {
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--primary-color);
+      text-shadow: 0 0 10px var(--primary-glow);
+    }
+
+    @keyframes fadeOut {
+      to {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="loading-screen">
+    <div class="loader-ring"></div>
+    <div class="loading-text">Launching Portal...</div>
+  </div>
+
+  <script>
+    // Redirect to login page after delay
+    setTimeout(() => {
+      window.location.href = "login.html";
+    }, 3000); // 3 seconds
+  </script>
+</body>
+</html>
